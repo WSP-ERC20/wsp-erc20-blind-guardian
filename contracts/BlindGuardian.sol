@@ -14,7 +14,7 @@ contract BlindGuardian {
 	uint256 panicLimit;												// Number of failsafes to trigger panic mode
 	uint256 startTime;												// When guarding begins
 	uint256 lockTime;													// Time to store Ether
-	uint256 panicTime;												// Additional storage time if in ortpanic
+	uint256 panicTime;												// Additional storage time if in panic
 
 	modifier onlyOwner() {
 		if (msg.sender == owner) _;
@@ -64,6 +64,7 @@ contract BlindGuardian {
 		}
 
 		addr.send(balance);
+		guarding = false;
 	}
 
 	function isPanicMode() returns bool {
